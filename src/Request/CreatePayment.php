@@ -9,100 +9,33 @@ use Comgate\Response\CreatePaymentResponse;
 
 class CreatePayment implements RequestInterface {
 
-  /**
-   * @var int
-   */
-  private $price;
+  private string $label;
 
-  /**
-   * @var string
-   */
-  private $refId;
+  private ?string $country = null;
 
-  /**
-   * @var string
-   */
-  private $email;
+  private ?string $payerId = null;
 
-  /**
-   * @var string
-   */
-  private $label;
+  private ?string $account = null;
 
-  /**
-   * @var string
-   */
-  private $method;
+  private ?string $phone = null;
 
-  /**
-   * @var string
-   */
-  private $curr;
+  private ?string $name = null;
 
-  /**
-   * @var string (default is 'CZ')
-   */
-  private $country;
+  private ?string $lang = null;
 
-  /**
-   * @var string (user identifier for saved card info)
-   */
-  private $payerId;
+  private ?bool $prepareOnly = null;
 
-  /**
-   * @var string
-   */
-  private $account;
+  private ?bool $preauth = null;
 
-  /**
-   * @var string
-   */
-  private $phone;
+  private ?bool $initRecurring = null;
 
-  /**
-   * @var string (product identifier)
-   */
-  private $name;
+  private ?bool $verification = null;
 
-  /**
-   * @var string (lang ISO-639-1, default='cs')
-   */
-  private $lang;
+  private ?bool $embedded = null;
 
-  /**
-   * @var bool (true = background create; false = create with redirect)
-   */
-  private $prepareOnly;
+  private ?bool $eetReport = null;
 
-  /**
-   * @var bool
-   */
-  private $preauth;
-
-  /**
-   * @var bool
-   */
-  private $initRecurring;
-
-  /**
-   * @var bool
-   */
-  private $verification;
-
-  /**
-   * @var bool
-   */
-  private $embedded;
-
-  /**
-   * @var bool
-   */
-  private $eetReport;
-
-  /**
-   * @var string (JSON)
-   */
-  private $eetData;
+  private ?string $eetData = null;
 
   /**
    * @param int $price (price in heller so for 10 CZK you must set 1000)
@@ -110,17 +43,10 @@ class CreatePayment implements RequestInterface {
    * @param string $email (email of client to send confirmation)
    * @param string $label (label of product 1-16 chars)
    * @param string $method (method of payment to show to customer)
-   * @param string $curr
    *
    * @throws LabelTooLongException
    */
-  public function __construct(int $price, string $refId, string $email, string $label, string $method = Method::ALL, string $curr = 'CZK') {
-    $this->price = $price;
-    $this->refId = $refId;
-    $this->email = $email;
-    $this->method = $method;
-    $this->curr = $curr;
-
+  public function __construct(private int $price, private string $refId, private string $email, string $label, private string $method = Method::ALL, private string $curr = 'CZK') {
     if (mb_strlen($label) > 16) {
       throw new LabelTooLongException('Product label is too long. Max length is 16 chars');
     }
@@ -137,8 +63,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param int $price
-   *
    * @return CreatePayment
    */
   public function setPrice(int $price): CreatePayment {
@@ -157,8 +81,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $refId
-   *
    * @return CreatePayment
    */
   public function setRefId(string $refId): CreatePayment {
@@ -177,8 +99,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $email
-   *
    * @return CreatePayment
    */
   public function setEmail(string $email): CreatePayment {
@@ -197,8 +117,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $label
-   *
    * @return CreatePayment
    */
   public function setLabel(string $label): CreatePayment {
@@ -217,8 +135,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $method
-   *
    * @return CreatePayment
    */
   public function setMethod(string $method): CreatePayment {
@@ -237,8 +153,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $curr
-   *
    * @return CreatePayment
    */
   public function setCurr(string $curr): CreatePayment {
@@ -257,8 +171,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $country
-   *
    * @return CreatePayment
    */
   public function setCountry(string $country): CreatePayment {
@@ -277,8 +189,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $payerId
-   *
    * @return CreatePayment
    */
   public function setPayerId(string $payerId): CreatePayment {
@@ -297,8 +207,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $account
-   *
    * @return CreatePayment
    */
   public function setAccount(string $account): CreatePayment {
@@ -317,8 +225,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $phone
-   *
    * @return CreatePayment
    */
   public function setPhone(string $phone): CreatePayment {
@@ -337,8 +243,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $name
-   *
    * @return CreatePayment
    */
   public function setName(string $name): CreatePayment {
@@ -357,8 +261,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $lang
-   *
    * @return CreatePayment
    */
   public function setLang(string $lang): CreatePayment {
@@ -377,8 +279,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $prepareOnly
-   *
    * @return CreatePayment
    */
   public function setPrepareOnly(bool $prepareOnly): CreatePayment {
@@ -397,8 +297,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $preauth
-   *
    * @return CreatePayment
    */
   public function setPreauth(bool $preauth): CreatePayment {
@@ -417,8 +315,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $initRecurring
-   *
    * @return CreatePayment
    */
   public function setInitRecurring(bool $initRecurring): CreatePayment {
@@ -437,8 +333,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $verification
-   *
    * @return CreatePayment
    */
   public function setVerification(bool $verification): CreatePayment {
@@ -457,8 +351,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $embedded
-   *
    * @return CreatePayment
    */
   public function setEmbedded(bool $embedded): CreatePayment {
@@ -477,8 +369,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param bool $eetReport
-   *
    * @return CreatePayment
    */
   public function setEetReport(bool $eetReport): CreatePayment {
@@ -497,8 +387,6 @@ class CreatePayment implements RequestInterface {
 
 
   /**
-   * @param string $eetData
-   *
    * @return CreatePayment
    */
   public function setEetData(string $eetData): CreatePayment {

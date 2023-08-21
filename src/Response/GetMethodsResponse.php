@@ -14,8 +14,6 @@ class GetMethodsResponse {
 
 
   /**
-   * @param string $rawData
-   *
    * @throws InvalidArgumentException
    */
   public function __construct(string $rawData) {
@@ -34,7 +32,7 @@ class GetMethodsResponse {
    * @return array
    */
   private function parseData(string $rawData) {
-    $get_json = json_decode($rawData);
+    $get_json = json_decode($rawData, null, 512, JSON_THROW_ON_ERROR);
     $data = [];
     foreach ($get_json->methods as $value) {
       $data[$value->id] = $value->name . ' | ' . $value->description;

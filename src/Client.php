@@ -8,38 +8,15 @@ use Comgate\Response\CreatePaymentResponse;
 
 class Client {
 
-  /**
-   * @var string
-   */
-  private $merchantId;
-
-  /**
-   * @var bool
-   */
-  private $test;
-
-  /**
-   * @var null|string
-   */
-  private $secret;
-
-  /**
-   * @var \GuzzleHttp\Client
-   */
-  private $client;
+  private \GuzzleHttp\Client $client;
 
 
   /**
-   * @param string $merchantId
    * @param bool $test (use test env)
    * @param string|null $secret (if not set you cannot create transaction in
    *   background)
    */
-  public function __construct(string $merchantId, bool $test = FALSE, string $secret = NULL) {
-    $this->merchantId = $merchantId;
-    $this->test = $test;
-    $this->secret = $secret;
-
+  public function __construct(private string $merchantId, private bool $test = FALSE, private ?string $secret = NULL) {
     $this->client = new \GuzzleHttp\Client([
       'base_uri' => 'https://payments.comgate.cz/v1.0/',
     ]);
@@ -47,8 +24,6 @@ class Client {
 
 
   /**
-   * @param \GuzzleHttp\Client $client
-   *
    * @return $this
    */
   public function setClient(\GuzzleHttp\Client $client) {
@@ -59,8 +34,6 @@ class Client {
 
 
   /**
-   * @param RequestInterface $request
-   *
    * @return CreatePaymentResponse
    */
   public function send(RequestInterface $request) {

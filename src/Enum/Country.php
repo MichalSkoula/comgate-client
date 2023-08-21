@@ -5,8 +5,8 @@ namespace Comgate\Enum;
 
 class Country
 {
-    const CZ = 'CZ';
-    const SK = 'SK';
-    const PL = 'PL';
-    const ALL = 'ALL';
+    public const CZ = 'CZ';
+    public const SK = 'SK';
+    public const PL = 'PL';
+    public const ALL = 'ALL';
 }

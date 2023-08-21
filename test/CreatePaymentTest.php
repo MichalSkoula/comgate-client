@@ -6,6 +6,7 @@ use Comgate\Exception\LabelTooLongException;
 use Comgate\Request\CreatePayment;
 use Comgate\Response\CreatePaymentResponse;
 use PHPUnit\Framework\TestCase;
+use DMS\PHPUnitExtensions\ArraySubset\Assert;
 
 class CreatePaymentTest extends TestCase
 {
@@ -408,7 +409,7 @@ class CreatePaymentTest extends TestCase
         $createPayment = $this->create();
         $createPayment->setPrepareOnly(true);
 
-        $this->assertArraySubset(
+        Assert::assertArraySubset(
             [
                 'price'       => self::TEST_PRICE,
                 'refId'       => self::TEST_REF_ID,

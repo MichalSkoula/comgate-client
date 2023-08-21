@@ -8,23 +8,12 @@ use Comgate\Request\RequestInterface;
 class GetMethods implements RequestInterface {
 
   /**
-   * @var string
-   */
-  private $curr;
-
-  /**
-   * @var string
-   */
-  private $country;
-
-  /**
    * @param string|null $curr
    * @param string|null $country
    *
    */
-  public function __construct($curr = NULL, $country = NULL) {
-    $this->curr = $curr;
-    $this->country = $country;
+  public function __construct(private $curr = NULL, private $country = NULL)
+  {
   }
 
 

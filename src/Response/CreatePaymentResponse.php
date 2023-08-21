@@ -9,10 +9,7 @@ use Comgate\Exception\InvalidArgumentException;
 
 class CreatePaymentResponse
 {
-    /**
-     * @var int
-     */
-    private $code;
+    private ?int $code = null;
 
     /**
      * @var string
@@ -31,10 +28,9 @@ class CreatePaymentResponse
 
 
 	/**
-	 * @param array $rawData
-	 * @throws InvalidArgumentException
-	 * @throws ErrorCodeException
-	 */
+     * @throws InvalidArgumentException
+     * @throws ErrorCodeException
+     */
     public function __construct(array $rawData)
     {
         if (isset($rawData['code'])) {

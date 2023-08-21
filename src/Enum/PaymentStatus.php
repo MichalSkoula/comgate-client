@@ -5,8 +5,8 @@ namespace Comgate\Enum;
 
 class PaymentStatus
 {
-    const PENDING = 'PENDING';
-    const PAID = 'PAID';
-    const CANCELLED = 'CANCELLED';
-    const AUTHORIZED = 'AUTHORIZED';
+    public const PENDING = 'PENDING';
+    public const PAID = 'PAID';
+    public const CANCELLED = 'CANCELLED';
+    public const AUTHORIZED = 'AUTHORIZED';
 }
