@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/renat-magadiev/comgate-client.svg?branch=master)](https://travis-ci.org/renat-magadiev/comgate-client) [![Coverage Status](https://coveralls.io/repos/github/renat-magadiev/comgate-client/badge.svg?branch=master)](https://coveralls.io/github/renat-magadiev/comgate-client?branch=master)
 
-# Comgate API client
+# Comgate API client for PHP >= 8
 Comgate API client wrapper
 
 This package allow you to create payment using Comgate API and get redirect URL to your customers
 
 Requirements
 -------------
-- PHP 7.0 or higher
+- PHP 8.0 or higher
 - [guzzlehttp/guzzle](https://packagist.org/packages/guzzlehttp/guzzle)
 
 Installation
