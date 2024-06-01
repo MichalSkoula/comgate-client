@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/renat-magadiev/comgate-client.svg?branch=master)](https://travis-ci.org/renat-magadiev/comgate-client) [![Coverage Status](https://coveralls.io/repos/github/renat-magadiev/comgate-client/badge.svg?branch=master)](https://coveralls.io/github/renat-magadiev/comgate-client?branch=master)
+## The purpose of this fork was to convert the original repository to PHP8. 
+ I now recommend using the official SDK: https://github.com/comgate-payments/sdk-php/
 
 # Comgate API client for PHP >= 8
 Comgate API client wrapper
